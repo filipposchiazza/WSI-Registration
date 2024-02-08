@@ -2,8 +2,24 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+
 def mutual_img_info(img1, img2, plot_log_hist=True):
-    "Calculate Mutual Image Information between img1 and img2"
+    """Calculate Mutual Information between img1 and img2
+
+    Parameters
+    ----------
+    img1 : numpy.ndarray
+        First image to compare
+    img2 : numpy.ndarray
+        Second image to compare
+    plot_log_hist : bool, optional
+        If True, plot the log of the joint histogram, by default True
+
+    Returns
+    -------
+    float
+        Mutual Information between img1 and img2
+    """
     hist_2d, _, _ = np.histogram2d(img1.ravel(), 
                                    img2.ravel(),
                                    bins=255)
@@ -21,8 +37,22 @@ def mutual_img_info(img1, img2, plot_log_hist=True):
     return np.sum(pxy[nzs] * np.log(pxy[nzs] / px_py[nzs]))
 
 
+
 def norm_cross_corr(img1, img2):
-    "Calculate Normalized Cross Correlation between img1 and img2"
+    """Calculate thr normalized cross-correlation between img1 and img2
+
+    Parameters
+    ----------
+    img1 : numpy.ndarray
+        First image to compare
+    img2 : numpy.ndarray
+        Second image to compare
+    
+    Returns
+    -------
+    float
+        Normalized Cross-Correlation between img1 and img2
+    """
     mean1 = np.mean(img1)
     mean2 = np.mean(img2)
     diff1 = img1 - mean1
@@ -34,8 +64,22 @@ def norm_cross_corr(img1, img2):
     return num/den
 
 
+
 def mse(img1, img2):
-    "Calculate Mean Squared Error between img1 and img2"
+    """Calculate the Mean Squared Error between img1 and img2
+
+    Parameters
+    ----------
+    img1 : numpy.ndarray
+        First image to compare
+    img2 : numpy.ndarray
+        Second image to compare
+    
+    Returns
+    -------
+    float
+        Mean Squared Error between img1 and img2
+    """
     h, w = np.shape(img1)
     n = h * w
     return np.sum(np.power(img1 - img2, 2)) / n
