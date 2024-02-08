@@ -1,9 +1,8 @@
-# Images and pdf
+# Images
 *.png
 *.jpg
 *.jpeg
 *.gif
-*.pdf
 
 # python
 *.pyc
@@ -11,6 +10,16 @@ __pycache__/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+search_broken.ipynb
+Registration.ipynb
+Untitled*.ipynb
 
 # VSCode
-*.json
+.vscode/
+
+# Papers
+RegistationPapers/
+*.pdf
+
+# Trials scripts
+Static_Iterative_Registration.py
