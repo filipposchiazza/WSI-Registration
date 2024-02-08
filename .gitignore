@@ -1,0 +1,16 @@
+# Images and pdf
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.pdf
+
+# python
+*.pyc
+__pycache__/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# VSCode
+*.json
