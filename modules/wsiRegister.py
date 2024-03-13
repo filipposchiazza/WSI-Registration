@@ -77,7 +77,7 @@ class WSIRegister():
         # Store all the good matches as per Lowe's ratio test.
         good_matches = []
         for m,n in matches:
-            if m.distance < 0.7*n.distance:
+            if m.distance < 0.75*n.distance:
                 good_matches.append(m)
                 
         if len(good_matches) < min_match_count:
@@ -103,14 +103,28 @@ class WSIRegister():
             print(f"Number of matches after RANSAC: {len(good_matches_selected)}")
             
         if plot == True:
-            draw_params = dict(matchColor = (0,255,0), # draw matches in green color
-                               singlePointColor = None,
-                               matchesMask = matchesMask, # draw only inliers
-                               flags = 2)
-            img = cv2.drawMatches(target_to_show, kp1, source_to_show, kp2, good_matches, None, **draw_params)
-            plt.imshow(img, 'gray')
-            plt.title(plot_title, color='red')
-            plt.axis('off') 
+
+            draw_params_before_ransac = dict(matchColor = (0,255,0), # draw matches in green color
+                                             singlePointColor = None,
+                                             flags = 2)
+            img_before_ransac = cv2.drawMatches(target_to_show, kp1, source_to_show, kp2, good_matches, None, **draw_params_before_ransac)
+
+            draw_params_after_ransac = dict(matchColor = (0,255,0), # draw matches in green color
+                                            singlePointColor = None,
+                                            matchesMask = matchesMask, # draw only inliers
+                                            flags = 2)
+            img_after_ransac = cv2.drawMatches(target_to_show, kp1, source_to_show, kp2, good_matches, None, **draw_params_after_ransac)
+
+            # plot the images one under the other
+            plt.figure(figsize=(15, 10))
+            plt.subplot(211)
+            plt.imshow(img_before_ransac)
+            plt.axis('off')
+            plt.title('SIFT detection', color='red')
+            plt.subplot(212)
+            plt.imshow(img_after_ransac)
+            plt.axis('off')
+            plt.title('SIFT detection + RANSAC', color='red')
             plt.show()
             
         # Extract points
